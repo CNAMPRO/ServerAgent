@@ -28,6 +28,7 @@ public class Servertest {
         //listOfMessages.forEach((msg)-> System.out.println(msg.getText()));
 
         System.out.println("Closing sockets.");
+        // close socket 
         objectInputStream.close();
         inputStream.close();
         socket.close();

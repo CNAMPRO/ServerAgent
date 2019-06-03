@@ -26,7 +26,7 @@ public class Clienttest {
         CBase testObject = new CBase(25, 25, 2, Color.BLACK, 0);
         objectOutputStream.writeObject(testObject);
         objectOutputStream.flush();
-        
+        // close socket 
         System.out.println("Closing socket and terminating program.");
         socket.close();
     }
