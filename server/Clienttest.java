@@ -1,7 +1,9 @@
+import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import system.*;
 
 public class Clienttest {
 
@@ -20,7 +22,7 @@ public class Clienttest {
         // make a bunch of messages to send.
 
         System.out.println("Sending messages to the ServerSocket");
-        CBase testObject = new CBase("test object");
+        CBase testObject = new CBase(25, 25, 2, Color.BLACK, 0);
         objectOutputStream.writeObject(testObject);
         objectOutputStream.flush();
         
