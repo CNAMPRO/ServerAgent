@@ -60,7 +60,7 @@ public class CClient {
 	}
 
 	private CEnvironement readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-		// in.defaultReadObject();
+		//in.defaultReadObject();
 		CEnvironement env = (CEnvironement) in.readObject();
 		return env;
 	}

@@ -75,24 +75,26 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
     @Override
     public void paintComponent(Graphics pG) {
         super.paintComponent(pG);
-        for(CBase b : mEnv.mBaseList)
-        {
-        	b.afficherBase(pG);
-        	b.afficherAgents(pG);
-        	
-        	for (CAgent agent : b.fourmiz) {
-        		// Pour chacun des agents on déssine ses phéromones
-        		agent.drawPheromones(pG, b.getColor());
-			}
-        }
-        	for(CNourriture n : mEnv.mNourritureList)
+        if(mEnv != null) {
+        	for(CBase b : mEnv.mBaseList)
             {
-            	n.afficher(pG);
-            } 
-        
-        for(CZoneAEviter z : mEnv.mZoneAEviterList)
-        {
-        	z.afficher(pG);
+            	b.afficherBase(pG);
+            	b.afficherAgents(pG);
+            	
+            	for (CAgent agent : b.fourmiz) {
+            		// Pour chacun des agents on déssine ses phéromones
+            		agent.drawPheromones(pG, b.getColor());
+    			}
+            }
+            	for(CNourriture n : mEnv.mNourritureList)
+                {
+                	n.afficher(pG);
+                } 
+            
+            for(CZoneAEviter z : mEnv.mZoneAEviterList)
+            {
+            	z.afficher(pG);
+            }
         }
     }
     
