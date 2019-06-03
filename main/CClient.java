@@ -7,8 +7,8 @@ public class CClient
 { 
 	// init 
 	private Socket socket		 = null; 
-	private DataInputStream input = null; 
-	private DataOutputStream outputTram	 = null; 
+	private OutputStream input = null; 
+	private ObjectOutputStream outputTram	 = null; 
 
 	public CClient(String address, int port) 
 	{ 
@@ -17,8 +17,8 @@ public class CClient
 			socket = new Socket(address, port); 
 			System.out.println("Connected"); 
 
-			input = new DataInputStream(System.in); 
-			outputTram = new DataOutputStream(socket.getOutputStream()); 
+			input = socket.getOutputStream();
+			outputTram = new ObjectOutputStream(input);
 		} 
 		catch(UnknownHostException u) 
 		{ 
@@ -29,35 +29,14 @@ public class CClient
 			System.out.println(i); 
 		} 
 		
-		String line = ""; 
-
-		while (!line.equals("Fin")) 
-		{ 
-			try
-			{ 	//line = input.readUTF();
-				line = input.readLine();
-				outputTram.writeUTF(line); 
-				//System.out.println("ouai");
-				
-			} 
-			catch(IOException i) 
-			{ 
-				System.out.println(i); 
-			} 
-		} 
-		
-		try
-		{ 
-			input.close(); 
-			outputTram.close(); 
-			socket.close(); 
-			System.exit(0);
-		} 
-		catch(IOException i) 
-		{ 
-			System.out.println(i); 
-		} 
 	} 
+	
+	public void close() throws IOException {
+		input.close(); 
+		outputTram.close(); 
+		socket.close(); 
+		System.exit(0);
+	}
 
 	//public static void main(String args[]) 
 	//{ 
