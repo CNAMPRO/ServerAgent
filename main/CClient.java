@@ -52,6 +52,7 @@ public class CClient {
 		getEnvironement();
 		createBase();
 		panel.launch();
+		updateEnv();
 	}
 
 	public void close() throws IOException {
@@ -99,9 +100,12 @@ public class CClient {
         	public void run() {
         		try {
         			while(true) {
-        				mEnv.updateEnvironement(readObject());
+        				CEnvironement aa = (CEnvironement) inputTram.readObject();
+        				if(aa != null) {
+        					System.out.println(aa.mBaseList.size());
+        					CEnvironement.updateEnvironement(aa);
+        				}
         			}
-        			
 				} catch (ClassNotFoundException | IOException e) {
 					
 					e.printStackTrace();

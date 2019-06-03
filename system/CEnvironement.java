@@ -142,7 +142,7 @@ public class CEnvironement extends Observable implements Serializable {
     	}
     }
     
-    public void updateEnvironement(CEnvironement envDistant) {
+    public static void updateEnvironement(CEnvironement envDistant) {
     	sInstance = envDistant;
     }
     
