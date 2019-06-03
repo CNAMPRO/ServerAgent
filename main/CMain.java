@@ -27,7 +27,7 @@ public class CMain {
     	fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	fenetre.setResizable(false);
 
-        // Cr�ation du contenu.
+        // Crï¿½ation du contenu.
     	CMainPanel panel = new CMainPanel();
     	fenetre.setContentPane(panel);
 
@@ -35,9 +35,15 @@ public class CMain {
     	fenetre.setVisible(true);
 
         // Lancement processus.
-    	//panel.launch();
     	CClient client = new CClient("localhost", 40000, panel);
-    	
+    	Runtime.getRuntime().addShutdownHook(new Thread()
+    	{
+    	    @Override
+    	    public void run()
+    	    {
+    	    	System.out.println("Le client s'est déconnecté");
+    	    }
+    	});
     }
     
 }

@@ -10,9 +10,9 @@ class ServerThread implements Runnable {
 	private Thread m_t;
 	private Socket m_s;
 	private PrintWriter m_out; // flux de sortie
-	private BufferedReader m_in; // flux d'entrée
+	private BufferedReader m_in; // flux d'entrÃ©e
 	private CServer m_CServer2; // classe principale
-	private int m_numClient = 0; // numéro de client géré par ce thread
+	private int m_numClient = 0; // numÃ©ro de client gÃ©rÃ© par ce thread
 	
 	
 	private OutputStream output = null;
@@ -39,7 +39,6 @@ class ServerThread implements Runnable {
 		m_t = new Thread(this);
 		m_t.start();
 	}
-
 	public void run() {
 		String message = "";
 
@@ -96,4 +95,5 @@ class ServerThread implements Runnable {
 		outputTram.flush();
 		System.out.println("Closing socket and terminating program.");
 	}
+
 }
