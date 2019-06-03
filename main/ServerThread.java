@@ -10,9 +10,9 @@ class ServerThread implements Runnable {
 	private Thread m_t;
 	private Socket m_s;
 	private PrintWriter m_out; // flux de sortie
-	private BufferedReader m_in; // flux d'entrée
+	private BufferedReader m_in; // flux d'entree
 	private CServer m_CServer2; // classe principale
-	private int m_numClient = 0; // numéro de client géré par ce thread
+	private int m_numClient = 0; // numero de client que le thread gere
 	
 	
 	private OutputStream output = null;
@@ -44,42 +44,38 @@ class ServerThread implements Runnable {
 
 		System.out.println("Un nouveau client s'est connecte, no " + m_numClient);
 		try {
-			 
-			sendObjectCEnvironement(m_CServer2.mEnv);
-			
-			char charCur[] = new char[1];
-			while (m_in.read(charCur, 0, 1) != -1) {
-
-				if (charCur[0] != '\u0000' && charCur[0] != '\n' && charCur[0] != '\r') // "\u0000 " == null
-					message += charCur[0];
-				else if (!message.equalsIgnoreCase("")) {
-					if (charCur[0] == '\u0000')
-
-						m_CServer2.sendAll(message, "" + charCur[0]);
-					else
-						m_CServer2.sendAll(message, "");
-					message = "";
+			while(true) {
+				sendObjectCEnvironement(m_CServer2.mEnv);
+				CBase base = readObject();
+				if(base != null) {
+					System.out.println();
+					m_CServer2.mEnv.mBaseList.add(base);
 				}
 			}
+			
 		} catch (Exception e) {
-		} finally // deconnexion du client
-		{
-//			try {
-//				// on indique la deconnexion du client
-//				//m_CServer2.delClient(m_numClient); // on supprime le client de la liste
-//				//m_s.close(); // fermeture du socket
-//			} catch (IOException e) {
-//				System.out.println(e);
-//			}
 		}
 	}
 
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private CEnvironement readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		// in.defaultReadObject();
 		CEnvironement env = (CEnvironement) in.readObject();
 		return env;
 	}
 
+	/**
+	 * 
+	 * @param object
+	 * @param outputStream
+	 * @throws IOException
+	 */
 	public void sendObject(CBase object, OutputStream outputStream) throws IOException {
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 		System.out.println("Sending messages to the ServerSocket");
@@ -87,12 +83,24 @@ class ServerThread implements Runnable {
 		objectOutputStream.flush();
 		System.out.println("Closing socket and terminating program.");
 	}
+	/**
+	 * 
+	 * @param object
+	 * @throws IOException
+	 */
+	private CBase readObject() throws IOException, ClassNotFoundException {
+		CBase base = null;
+		if(inputTram.available() > 0) {
+			base = (CBase) inputTram.readObject();
+		}
+		
+		return base;
+	}
+
 	
 	public void sendObjectCEnvironement(CEnvironement object) throws IOException {
-		System.out.println("Sending messages to the Client");
 		outputTram.writeObject(object);
 		outputTram.flush();
-		System.out.println("Closing socket and terminating program.");
 	}
 
 }

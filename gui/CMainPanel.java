@@ -50,11 +50,12 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
     }
     
     /**
-     * Démarrage du panel
+     * DÃ©marrage du panel
      */
     public void launch() {
         mEnv = CEnvironement.getInstance();
-        mEnv.init(BASE_COUNT, AGENTS_COUNT, getWidth(), getHeight(), NOURRITURE_COUNT);
+
+        mEnv.init(0, 0, getWidth(), getHeight(),NOURRITURE_COUNT);
         mEnv.addObserver(this);
         
         mTimer = new Timer();
@@ -82,7 +83,7 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
             	b.afficherAgents(pG);
             	
             	for (CAgent agent : b.fourmiz) {
-            		// Pour chacun des agents on déssine ses phéromones
+            		// Pour chacun des agents on dÃ©ssine ses phÃ©romones
             		agent.drawPheromones(pG, b.getColor());
     			}
             }
