@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CBase extends CObject implements Serializable{
+public class CBase extends CObject implements Serializable, ISendable{
 	
 	public int rayon = 10;
 	public int nbAgents = 0;

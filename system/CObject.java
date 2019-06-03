@@ -1,6 +1,6 @@
 package system;
 
-public class CObject {
+public class CObject implements ISendable {
 	public double posX;
 	public double posY;
 	
