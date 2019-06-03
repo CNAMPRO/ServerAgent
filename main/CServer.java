@@ -44,7 +44,7 @@ public class CServer
 				ss = new ServerSocket(_PORT);
 				mEnv = CEnvironement.getInstance();
 		        mEnv.init(0, 0, 768, 768, NOURRITURE_COUNT);
-		       
+		        mEnv.update();
 				printBienvenue(_PORT);
 				
 			} catch (UnknownHostException e) 

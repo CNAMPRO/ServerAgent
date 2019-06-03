@@ -21,7 +21,7 @@ class ServerThread implements Runnable {
 	private ObjectInputStream inputTram = null;
 	
 
-	ServerThread(Socket s, CServer blablaServ) throws IOException {
+	ServerThread(Socket s, CServer blablaServ) throws IOException, ClassNotFoundException {
 		m_CServer2 = blablaServ;
 		m_s = s;
 		System.out.println(s);
@@ -35,7 +35,14 @@ class ServerThread implements Runnable {
 			m_numClient = blablaServ.addClient(m_out);
 		} catch (IOException e) {
 		}
-
+		sendObjectCEnvironement(m_CServer2.mEnv);
+		CBase base = (CBase) inputTram.readObject();
+		System.out.println(base);
+		if(base != null) {
+			System.out.println("ajout base");
+			m_CServer2.mEnv.mBaseList.add(base);
+			System.out.println(m_CServer2.mEnv.mBaseList.size());
+		}
 		m_t = new Thread(this);
 		m_t.start();
 	}
@@ -44,13 +51,12 @@ class ServerThread implements Runnable {
 
 		System.out.println("Un nouveau client s'est connecte, no " + m_numClient);
 		try {
+			
 			while(true) {
-				sendObjectCEnvironement(m_CServer2.mEnv);
-				CBase base = readObject();
-				if(base != null) {
-					System.out.println();
-					m_CServer2.mEnv.mBaseList.add(base);
-				}
+				m_CServer2.mEnv.update();
+				outputTram.writeObject(m_CServer2.mEnv);
+				outputTram.flush();
+				
 			}
 			
 		} catch (Exception e) {
@@ -68,6 +74,11 @@ class ServerThread implements Runnable {
 		// in.defaultReadObject();
 		CEnvironement env = (CEnvironement) in.readObject();
 		return env;
+	}
+	
+	private CBase readBase() throws IOException, ClassNotFoundException {
+		CBase base = (CBase) inputTram.readObject();
+		return base;
 	}
 
 	/**
@@ -88,17 +99,18 @@ class ServerThread implements Runnable {
 	 * @param object
 	 * @throws IOException
 	 */
-	private CBase readObject() throws IOException, ClassNotFoundException {
-		CBase base = null;
+	private void readObject() throws IOException, ClassNotFoundException {
 		if(inputTram.available() > 0) {
-			base = (CBase) inputTram.readObject();
+			System.out.print("ajout base");
+			CBase base = (CBase) inputTram.readObject();
+			m_CServer2.mEnv.mBaseList.add(base);
+			System.out.println(m_CServer2.mEnv.mBaseList.size());
 		}
-		
-		return base;
 	}
 
 	
 	public void sendObjectCEnvironement(CEnvironement object) throws IOException {
+		
 		outputTram.writeObject(object);
 		outputTram.flush();
 	}
