@@ -1,9 +1,10 @@
 package system;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CBase extends CObject{
+public class CBase extends CObject implements Serializable{
 	
 	public int rayon = 10;
 	public int nbAgents = 0;
