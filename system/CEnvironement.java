@@ -23,6 +23,15 @@ public class CEnvironement extends Observable {
         // Création du générateur aléatoire.
         mRandomGen = new Random();
     }
+    
+    private CEnvironement(CEnvironement env) {
+    	mBaseList = env.mBaseList;
+    	mNourritureList = env.mNourritureList;
+    	mZoneAEviterList = env.mZoneAEviterList;
+    
+        // Création du générateur aléatoire.
+        mRandomGen = new Random();
+    }
 
     /**
      * Singleton
@@ -34,6 +43,12 @@ public class CEnvironement extends Observable {
 		}
 		return sInstance;
 	}
+    
+    public void ImportEnvironement(CEnvironement env) {
+    	sInstance = new CEnvironement(env);
+    }
+    
+    
         
     /**
      * 
