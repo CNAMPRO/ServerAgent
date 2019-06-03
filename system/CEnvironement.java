@@ -44,7 +44,7 @@ public class CEnvironement extends Observable {
 		return sInstance;
 	}
     
-    public void ImportEnvironement(CEnvironement env) {
+    public static void ImportEnvironement(CEnvironement env) {
     	sInstance = new CEnvironement(env);
     }
     

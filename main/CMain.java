@@ -14,9 +14,11 @@ public class CMain {
     /**
      * 
      * @param args
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
     	 
     	JFrame fenetre = new JFrame();
     	fenetre.setTitle(TITLE);
@@ -33,7 +35,9 @@ public class CMain {
     	fenetre.setVisible(true);
 
         // Lancement processus.
-    	panel.launch();
-    	CClient client = new CClient("localhost", 40000);
+    	//panel.launch();
+    	CClient client = new CClient("localhost", 40000, panel);
+    	
     }
+    
 }

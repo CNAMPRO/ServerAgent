@@ -1,16 +1,27 @@
 package main;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
-import java.util.Vector; 
+import java.util.Vector;
+
+import system.CBase;
+import system.CEnvironement; 
 
 public class CServer
 { 
 
 	private int m_nbClient =0 ; //nb Client Connecter
 	private Vector m_TabClient = new Vector(); //TabClient
+	static CEnvironement mEnv;
+	private static final int BASE_COUNT = 1;
+    private static final int AGENTS_COUNT = 30;
+    private static final int NOURRITURE_COUNT = 2;
 	
 	public static void main(String args[]) 
 	{ 
@@ -25,7 +36,11 @@ public class CServer
 			try
 			{
 				ss = new ServerSocket(port);
+				mEnv = CEnvironement.getInstance();
+		        mEnv.init(BASE_COUNT, AGENTS_COUNT, 768, 768, NOURRITURE_COUNT);
+		       
 				printBienvenue(port);
+				
 			} catch (UnknownHostException e) 
 			{
 			    e.printStackTrace();
@@ -81,6 +96,5 @@ public class CServer
 	  synchronized public int getNbClients()
 	  {
 	    return m_nbClient; // retourne le nombre de clients connectés
-	  }
-	
+	  }	
 } 

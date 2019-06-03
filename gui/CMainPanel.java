@@ -35,7 +35,7 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
     private Timer mTimer;
     boolean mInProgress = false;
     private TimerTask mTask;
-    private CEnvironement mEnv;
+    private CEnvironement mEnv = null;
 
 
     /**
