@@ -10,9 +10,9 @@ class ServerThread implements Runnable {
 	private Thread m_t;
 	private Socket m_s;
 	private PrintWriter m_out; // flux de sortie
-	private BufferedReader m_in; // flux d'entrée
+	private BufferedReader m_in; // flux d'entree
 	private CServer m_CServer2; // classe principale
-	private int m_numClient = 0; // numéro de client géré par ce thread
+	private int m_numClient = 0; // numero de client que le thread gere
 	
 	
 	private OutputStream output = null;
@@ -75,12 +75,25 @@ class ServerThread implements Runnable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private CEnvironement readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		// in.defaultReadObject();
 		CEnvironement env = (CEnvironement) in.readObject();
 		return env;
 	}
 
+	/**
+	 * 
+	 * @param object
+	 * @param outputStream
+	 * @throws IOException
+	 */
 	public void sendObject(CBase object, OutputStream outputStream) throws IOException {
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 		System.out.println("Sending messages to the ServerSocket");
@@ -88,7 +101,11 @@ class ServerThread implements Runnable {
 		objectOutputStream.flush();
 		System.out.println("Closing socket and terminating program.");
 	}
-	
+	/**
+	 * 
+	 * @param object
+	 * @throws IOException
+	 */
 	public void sendObjectCEnvironement(CEnvironement object) throws IOException {
 		System.out.println("Sending messages to the Client");
 		outputTram.writeObject(object);

@@ -58,7 +58,6 @@ public class CEnvironement extends Observable implements Serializable {
      */
     public CNourriture catchNourriture(CNourriture pNourrite) {
         	pNourrite.decreaseSize();
-            // TODO CNAM : 2 lignes de code Ã  ajouter ici.
         	return pNourrite;
     }
     

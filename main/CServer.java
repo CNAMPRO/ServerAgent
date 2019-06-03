@@ -23,7 +23,7 @@ public class CServer
     private static final int AGENTS_COUNT = 30;
     private static final int NOURRITURE_COUNT = 2;
 	private ArrayList<PrintWriter> m_TabClient;
-	private static final Integer _PORT = 40000;
+	public static final Integer _PORT = 40000;
 	
 	public CServer() {
 		this.m_TabClient = new ArrayList<PrintWriter>();
