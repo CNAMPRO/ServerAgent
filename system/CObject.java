@@ -1,6 +1,8 @@
 package system;
 
-public class CObject implements ISendable {
+import java.io.Serializable;
+
+public class CObject implements Serializable {
 	public double posX;
 	public double posY;
 	

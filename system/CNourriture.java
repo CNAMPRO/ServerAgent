@@ -1,8 +1,9 @@
 package system;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public class CNourriture extends CObject {
+public class CNourriture extends CObject implements Serializable{
 	public double rayon = 20;
 	Color color;
 	public int quantite = 20;

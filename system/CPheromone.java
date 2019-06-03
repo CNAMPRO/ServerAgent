@@ -1,7 +1,8 @@
 package system;
 
+import java.io.Serializable;
 
-public class CPheromone extends CObject {
+public class CPheromone extends CObject implements Serializable{
 	
 	private int posX;
 	private int posY;

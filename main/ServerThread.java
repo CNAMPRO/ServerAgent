@@ -24,6 +24,7 @@ class ServerThread implements Runnable {
 	ServerThread(Socket s, CServer blablaServ) throws IOException {
 		m_CServer2 = blablaServ;
 		m_s = s;
+		System.out.println(s);
 		output = m_s.getOutputStream();
 		input = m_s.getInputStream();
 		outputTram = new ObjectOutputStream(output);
@@ -45,7 +46,7 @@ class ServerThread implements Runnable {
 		System.out.println("Un nouveau client s'est connecte, no " + m_numClient);
 		try {
 			 
-			sendObjectCEnvironement(m_CServer2.mEnv,outputTram);
+			sendObjectCEnvironement(m_CServer2.mEnv);
 			
 			char charCur[] = new char[1];
 			while (m_in.read(charCur, 0, 1) != -1) {
@@ -89,11 +90,10 @@ class ServerThread implements Runnable {
 		System.out.println("Closing socket and terminating program.");
 	}
 	
-	public void sendObjectCEnvironement(CEnvironement object, OutputStream outputStream) throws IOException {
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-		System.out.println("Sending messages to the ServerSocket");
-		objectOutputStream.writeObject(object);
-		objectOutputStream.flush();
+	public void sendObjectCEnvironement(CEnvironement object) throws IOException {
+		System.out.println("Sending messages to the Client");
+		outputTram.writeObject(object);
+		outputTram.flush();
 		System.out.println("Closing socket and terminating program.");
 	}
 }

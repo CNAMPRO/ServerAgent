@@ -29,6 +29,7 @@ public class CClient {
 			panel = panel;
 			socket = new Socket(address, port);
 			System.out.println("Connected");
+			System.out.println(socket);
 
 			// get the output stream from the socket
 			output = socket.getOutputStream();
@@ -46,7 +47,7 @@ public class CClient {
 		
 		getEnvironement();
 		
-		createBase();
+		//createBase();
 		panel.launch();
 	}
 
@@ -59,17 +60,16 @@ public class CClient {
 		System.exit(0);
 	}
 
-	private CEnvironement readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+	private CEnvironement readObject() throws IOException, ClassNotFoundException {
 		//in.defaultReadObject();
-		CEnvironement env = (CEnvironement) in.readObject();
+		CEnvironement env = (CEnvironement) inputTram.readObject();
 		return env;
 	}
 
-	public void sendObject(CBase object, OutputStream outputStream) throws IOException {
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+	public void sendObject(CBase object) throws IOException {
 		System.out.println("Sending messages to the ServerSocket");
-		objectOutputStream.writeObject(object);
-		objectOutputStream.flush();
+		outputTram.writeObject(object);
+		outputTram.flush();
 		System.out.println("Closing socket and terminating program.");
 	}
 
@@ -79,14 +79,14 @@ public class CClient {
 		double y = 0 + r.nextInt(768 - 0);
 
 		CBase mBase = new CBase(x, y, 10, java.awt.Color.GREEN, 10);
-		sendObject(mBase, outputTram);
+		sendObject(mBase);
 		
 		
 	}
 	
 	public void getEnvironement() throws ClassNotFoundException, IOException {
 		
-		 mEnv = readObject(inputTram);
+		 mEnv = readObject();
 		 System.out.println(mEnv.mBaseList.size());
 		 CEnvironement.ImportEnvironement(mEnv);
 	}

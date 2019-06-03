@@ -1,9 +1,10 @@
 package system;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.*;
 
-public class CEnvironement extends Observable {
+public class CEnvironement extends Observable implements Serializable {
 	private static CEnvironement sInstance = null;
     protected Random mRandomGen;
     public double mWidth;

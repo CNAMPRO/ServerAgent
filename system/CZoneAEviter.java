@@ -2,8 +2,9 @@ package system;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public class CZoneAEviter extends CObject {
+public class CZoneAEviter extends CObject implements Serializable {
 	public double rayon;
 	Color color;
 	
