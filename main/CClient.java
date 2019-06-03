@@ -9,6 +9,8 @@ import java.util.TimerTask;
 import gui.CMainPanel;
 import system.CBase;
 import system.CEnvironement;
+
+import java.awt.Color;
 import java.io.*;
 
 public class CClient {
@@ -47,7 +49,7 @@ public class CClient {
 		
 		getEnvironement();
 		
-		//createBase();
+		createBase();
 		panel.launch();
 	}
 
@@ -67,18 +69,20 @@ public class CClient {
 	}
 
 	public void sendObject(CBase object) throws IOException {
-		System.out.println("Sending messages to the ServerSocket");
+		System.out.println("Sending Base");
 		outputTram.writeObject(object);
 		outputTram.flush();
-		System.out.println("Closing socket and terminating program.");
+		System.out.println("Closing Base");
 	}
 
 	public void createBase() throws IOException {
-		Random r = new Random();
-		double x = 0 + r.nextInt(768 - 0);
-		double y = 0 + r.nextInt(768 - 0);
-
-		CBase mBase = new CBase(x, y, 10, java.awt.Color.GREEN, 10);
+		Random rand = new Random();
+		double x = rand.nextInt((2000 - 200) + 1) + 200;
+		double y = rand.nextInt((2000 - 200) + 1) + 200;
+		float r = rand.nextFloat() / 2f + 0.5f;
+		float g = rand.nextFloat() / 2f + 0.5f;
+		float b = rand.nextFloat() / 2f + 0.5f;
+		CBase mBase = new CBase(x, y, 10, new Color(r, g, b), 10);
 		sendObject(mBase);
 		
 		
@@ -87,7 +91,6 @@ public class CClient {
 	public void getEnvironement() throws ClassNotFoundException, IOException {
 		
 		 mEnv = readObject();
-		 System.out.println(mEnv.mBaseList.size());
 		 CEnvironement.ImportEnvironement(mEnv);
 	}
 }
