@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 
 import system.CBase;
 import system.CEnvironement; 
-import java.util.ArrayList
+import java.util.ArrayList;
 
 public class CServer
 { 
@@ -41,11 +41,11 @@ public class CServer
 			ServerSocket ss = null;
 			try
 			{
-				ss = new ServerSocket(port);
+				ss = new ServerSocket(_PORT);
 				mEnv = CEnvironement.getInstance();
 		        mEnv.init(BASE_COUNT, AGENTS_COUNT, 768, 768, NOURRITURE_COUNT);
 		       
-				printBienvenue(port);
+				printBienvenue(_PORT);
 				
 			} catch (UnknownHostException e) 
 			{
