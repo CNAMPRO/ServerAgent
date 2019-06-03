@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class CEnvironement extends Observable implements Serializable {
-	private static CEnvironement sInstance = null;
+	public static CEnvironement sInstance = null;
     protected Random mRandomGen;
     public double mWidth;
     public double mHeight;
@@ -141,6 +141,10 @@ public class CEnvironement extends Observable implements Serializable {
         		}		
 			}
     	}
+    }
+    
+    public void updateEnvironement(CEnvironement envDistant) {
+    	sInstance = envDistant;
     }
     
     
