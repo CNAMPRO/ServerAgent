@@ -14,9 +14,11 @@ public class CMain {
     /**
      * 
      * @param args
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
     	 
     	JFrame fenetre = new JFrame();
     	fenetre.setTitle(TITLE);
@@ -25,7 +27,7 @@ public class CMain {
     	fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	fenetre.setResizable(false);
 
-        // Cr�ation du contenu.
+        // Crï¿½ation du contenu.
     	CMainPanel panel = new CMainPanel();
     	fenetre.setContentPane(panel);
 
@@ -33,15 +35,13 @@ public class CMain {
     	fenetre.setVisible(true);
 
         // Lancement processus.
-    	panel.launch();
-    	CClient client = new CClient("localhost", 40000);
+    	CClient client = new CClient("localhost", 40000, panel);
     	Runtime.getRuntime().addShutdownHook(new Thread()
     	{
     	    @Override
     	    public void run()
     	    {
-    	        //do your stuff
-    	    	System.out.println("Le client s'est d�connect�");
+    	    	System.out.println("Le client s'est déconnecté");
     	    }
     	});
     }

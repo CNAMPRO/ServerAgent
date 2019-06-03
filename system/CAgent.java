@@ -6,10 +6,11 @@ import java.util.List;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
 //Etat de combat -> recuperation de nourriture
 
-public class CAgent extends CObject {
+public class CAgent extends CObject implements Serializable{
 	protected final static double STEP = 4;
 	protected final static double CHANGING_DIRECTION_PROB = 0.05;
 	public static final double DISTANCE_MIN = 5;

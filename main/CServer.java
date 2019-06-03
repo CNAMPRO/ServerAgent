@@ -2,16 +2,26 @@ package main;
 
 import java.awt.List;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Vector; 
+
+import system.CBase;
+import system.CEnvironement; 
+import java.util.ArrayList
 
 public class CServer
 { 
 
 	private int m_nbClient =0 ; //nb Client Connecter
+	static CEnvironement mEnv;
+	private static final int BASE_COUNT = 1;
+    private static final int AGENTS_COUNT = 30;
+    private static final int NOURRITURE_COUNT = 2;
 	private ArrayList<PrintWriter> m_TabClient;
 	private static final Integer _PORT = 40000;
 	
@@ -31,8 +41,12 @@ public class CServer
 			ServerSocket ss = null;
 			try
 			{
-				ss = new ServerSocket(_PORT);
-				printBienvenue(_PORT);
+				ss = new ServerSocket(port);
+				mEnv = CEnvironement.getInstance();
+		        mEnv.init(BASE_COUNT, AGENTS_COUNT, 768, 768, NOURRITURE_COUNT);
+		       
+				printBienvenue(port);
+				
 			} catch (UnknownHostException e) 
 			{
 			    e.printStackTrace();
@@ -80,12 +94,11 @@ public class CServer
 	  {
 		  m_nbClient++; 
 		  m_TabClient.add(out); 
-	    return m_TabClient.size()-1; // on retourne le numéro du client ajouté (size-1)
+	    return m_TabClient.size()-1; // on retourne le numÃ©ro du client ajoutÃ© (size-1)
 	  }
 
 	  synchronized public int getNbClients()
 	  {
-	    return m_nbClient; // retourne le nombre de clients connectés
-	  }
-	
+	    return m_nbClient; // retourne le nombre de clients connectÃ©s
+	  }	
 } 
