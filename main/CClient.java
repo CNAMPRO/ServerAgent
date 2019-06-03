@@ -22,9 +22,11 @@ public class CClient {
 	private ObjectInputStream inputTram = null;
 	public CEnvironement mEnv;
 	private CMainPanel panel;
-	
+
 	private static final int TIMER_DELAY = 0;
-    private static final int TIMER_PERIOD = 10;
+	private static final int TIMER_PERIOD = 10;
+	private Timer mTimer;
+	private TimerTask mTask;
 
 	public CClient(String address, int port, CMainPanel panel) throws IOException, ClassNotFoundException {
 		try {
@@ -46,9 +48,8 @@ public class CClient {
 		} catch (IOException i) {
 			System.out.println(i);
 		}
-		
+
 		getEnvironement();
-		
 		createBase();
 		panel.launch();
 	}
@@ -63,7 +64,6 @@ public class CClient {
 	}
 
 	private CEnvironement readObject() throws IOException, ClassNotFoundException {
-		//in.defaultReadObject();
 		CEnvironement env = (CEnvironement) inputTram.readObject();
 		return env;
 	}
@@ -84,13 +84,30 @@ public class CClient {
 		float b = rand.nextFloat() / 2f + 0.5f;
 		CBase mBase = new CBase(x, y, 10, new Color(r, g, b), 10);
 		sendObject(mBase);
-		
-		
+
 	}
-	
+
 	public void getEnvironement() throws ClassNotFoundException, IOException {
-		
-		 mEnv = readObject();
-		 CEnvironement.ImportEnvironement(mEnv);
+		mEnv = readObject();
+		CEnvironement.ImportEnvironement(mEnv);
+	}
+
+	public void updateEnv() {
+		mTimer = new Timer();
+        mTask = new TimerTask(){
+        	@Override
+        	public void run() {
+        		try {
+        			while(true) {
+        				mEnv.updateEnvironement(readObject());
+        			}
+        			
+				} catch (ClassNotFoundException | IOException e) {
+					
+					e.printStackTrace();
+				}
+        	}
+        };
+        mTimer.scheduleAtFixedRate(mTask, TIMER_DELAY, TIMER_PERIOD);	
 	}
 }
