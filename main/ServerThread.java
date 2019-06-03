@@ -53,16 +53,6 @@ class ServerThread implements Runnable
       }
     }
     catch (Exception e){ }
-    finally //deconnexion du client
-    {
-      try
-      {
-      	// on indique la deconnexion du client
-        System.out.println("Le client no "+m_numClient+" s'est deconnecte");
-        m_CServer2.delClient(m_numClient); // on supprime le client de la liste
-        m_s.close(); // fermeture du socke
-      }
-      catch (IOException e){System.out.println(e); }
-    }
+
   }
 }

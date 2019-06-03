@@ -35,5 +35,15 @@ public class CMain {
         // Lancement processus.
     	panel.launch();
     	CClient client = new CClient("localhost", 40000);
+    	Runtime.getRuntime().addShutdownHook(new Thread()
+    	{
+    	    @Override
+    	    public void run()
+    	    {
+    	        //do your stuff
+    	    	System.out.println("Le client s'est déconnecté");
+    	    }
+    	});
     }
+    
 }
