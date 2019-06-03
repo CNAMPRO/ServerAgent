@@ -28,3 +28,8 @@ Création Client et insertion dans le main du jeu
 ```
 
 # ServerAgent Groupe 3 Malléjac Cencini Pierron Durando Bigot 03/06/2019
+
+```
+Mise en place du client fait dans la séance d'avant
+Travail pour mettre en commun le serveur et le client sur l'IHM mise en place
+```
