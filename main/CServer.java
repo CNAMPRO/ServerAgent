@@ -43,7 +43,7 @@ public class CServer
 			{
 				ss = new ServerSocket(_PORT);
 				mEnv = CEnvironement.getInstance();
-		        mEnv.init(BASE_COUNT, AGENTS_COUNT, 768, 768, NOURRITURE_COUNT);
+		        mEnv.init(0, 0, 768, 768, NOURRITURE_COUNT);
 		       
 				printBienvenue(_PORT);
 				
