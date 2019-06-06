@@ -59,7 +59,7 @@ class ServerThread implements Runnable {
 			
 			while(true) {
 				CServer.mEnv.update();
-				outputTram.writeObject(m_CServer2.mEnv);
+				outputTram.writeObject(CServer.mEnv);
 				outputTram.flush();
 				outputTram.reset();
 				
@@ -110,8 +110,8 @@ class ServerThread implements Runnable {
 		if(inputTram.available() > 0) {
 			System.out.print("ajout base");
 			CBase base = (CBase) inputTram.readObject();
-			m_CServer2.mEnv.mBaseList.add(base);
-			System.out.println(m_CServer2.mEnv.mBaseList.size());
+			CServer.mEnv.mBaseList.add(base);
+			System.out.println(CServer.mEnv.mBaseList.size());
 		}
 	}
 
