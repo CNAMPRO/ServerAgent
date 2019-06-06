@@ -31,12 +31,9 @@ public class CServer
 	
 	public static void main(String args[]) 
 	{ 
-
-		CServer server = new CServer();
-		
+		CServer server = new CServer();	
 		try
 		{
-			
 			new CommandesServ(server);
 			ServerSocket ss = null;
 			try

@@ -77,7 +77,6 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
     public void paintComponent(Graphics pG) {
         super.paintComponent(pG);
         if(mEnv != null) {
-        	System.out.println("peinture");
         	for(CBase b : mEnv.mBaseList)
             {
             	b.afficherBase(pG);
