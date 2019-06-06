@@ -29,13 +29,17 @@ class ServerThread implements Runnable {
 		input = m_s.getInputStream();
 		outputTram = new ObjectOutputStream(output);
 		inputTram = new ObjectInputStream(input);
+		
 		try {
 			m_out = new PrintWriter(m_s.getOutputStream());
 			m_in = new BufferedReader(new InputStreamReader(m_s.getInputStream()));
 			m_numClient = blablaServ.addClient(m_out);
 		} catch (IOException e) {
 		}
-		sendObjectCEnvironement(m_CServer2.mEnv);
+		System.out.println("aie");
+		sendObjectCEnvironement(CServer.mEnv);
+		System.out.println("ouille");
+		
 		CBase base = (CBase) inputTram.readObject();
 		System.out.println(base);
 		if(base != null) {
@@ -43,6 +47,7 @@ class ServerThread implements Runnable {
 			m_CServer2.mEnv.mBaseList.add(base);
 			System.out.println(m_CServer2.mEnv.mBaseList.size());
 		}
+		
 		m_t = new Thread(this);
 		m_t.start();
 	}
@@ -53,9 +58,10 @@ class ServerThread implements Runnable {
 		try {
 			
 			while(true) {
-				m_CServer2.mEnv.update();
+				//m_CServer2.mEnv.update();
 				outputTram.writeObject(m_CServer2.mEnv);
 				outputTram.flush();
+				outputTram.reset();
 				
 			}
 			
@@ -113,6 +119,7 @@ class ServerThread implements Runnable {
 		
 		outputTram.writeObject(object);
 		outputTram.flush();
+		outputTram.reset();
 	}
 
 }
