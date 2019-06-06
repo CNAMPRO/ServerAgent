@@ -91,7 +91,9 @@ public class CEnvironement extends Observable implements Serializable {
     	// Ajout de la nourriture sur le canvas
     	for(int i = 0; i < _nbNourriture; i++)
     	{
-    		mNourritureList.add(new CNourriture(x/2.0, y/2.0, Color.BLACK, 20));
+    		double _x  = mRandomGen.nextDouble() * mWidth;
+    		double _y  = mRandomGen.nextDouble() * mHeight;
+    		mNourritureList.add(new CNourriture(_x, _y, Color.BLACK, 20));
     	}
     	// Clean des obstacles
     	mZoneAEviterList.clear();
@@ -104,7 +106,6 @@ public class CEnvironement extends Observable implements Serializable {
     	for(CBase b : mBaseList)
     	{
     		b.bougerAgents();
-
     	}
     	combatAgent();
     	setChanged();

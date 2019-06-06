@@ -35,7 +35,7 @@ public class CMain {
     	fenetre.setVisible(true);
 
         // Lancement processus.
-    	CClient client = new CClient("localhost", CServer._PORT, panel);
+    	CClient client = new CClient("192.168.43.65", CServer._PORT, panel);
     	Runtime.getRuntime().addShutdownHook(new Thread()
     	{
     	    @Override
