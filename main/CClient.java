@@ -73,13 +73,14 @@ public class CClient {
 		System.out.println("Sending Base");
 		outputTram.writeObject(object);
 		outputTram.flush();
+		outputTram.reset();
 		System.out.println("Closing Base");
 	}
 
 	public void createBase() throws IOException {
 		Random rand = new Random();
-		double x = rand.nextInt((2000 - 200) + 1) + 200;
-		double y = rand.nextInt((2000 - 200) + 1) + 200;
+		double x = rand.nextInt((700 - 50) + 1) + 50;
+		double y = rand.nextInt((700 - 50) + 1) + 50;
 		float r = rand.nextFloat() / 2f + 0.5f;
 		float g = rand.nextFloat() / 2f + 0.5f;
 		float b = rand.nextFloat() / 2f + 0.5f;
@@ -102,7 +103,7 @@ public class CClient {
         			while(true) {
         				CEnvironement aa = (CEnvironement) inputTram.readObject();
         				if(aa != null) {
-        					System.out.println(aa.mBaseList.size());
+        					//System.out.println(aa.mBaseList.size());
         					CEnvironement.updateEnvironement(aa);
         				}
         			}

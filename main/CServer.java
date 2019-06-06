@@ -21,14 +21,14 @@ public class CServer
 	static CEnvironement mEnv;
 	private static final int BASE_COUNT = 1;
     private static final int AGENTS_COUNT = 30;
-    private static final int NOURRITURE_COUNT = 2;
+    private static final int NOURRITURE_COUNT = 1;
 	private ArrayList<PrintWriter> m_TabClient;
 	public static final Integer _PORT = 40000;
 	
 	public CServer() {
 		this.m_TabClient = new ArrayList<PrintWriter>();
-		
 	}
+	
 	public static void main(String args[]) 
 	{ 
 
@@ -44,7 +44,6 @@ public class CServer
 				ss = new ServerSocket(_PORT);
 				mEnv = CEnvironement.getInstance();
 		        mEnv.init(0, 0, 768, 768, NOURRITURE_COUNT);
-		        mEnv.update();
 				printBienvenue(_PORT);
 				
 			} catch (UnknownHostException e) 
@@ -57,6 +56,7 @@ public class CServer
 			
 			while(true)
 			{
+				mEnv.update();
 				new ServerThread(ss.accept(),server);
 			}
 		}
@@ -94,7 +94,7 @@ public class CServer
 	  {
 		  m_nbClient++; 
 		  m_TabClient.add(out); 
-	    return m_TabClient.size()-1; // on retourne le numéro du client ajouté (size-1)
+		  return m_TabClient.size()-1; // on retourne le numéro du client ajouté (size-1)
 	  }
 
 	  synchronized public int getNbClients()

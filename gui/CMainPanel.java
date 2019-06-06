@@ -27,7 +27,7 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
    // private static final int AGENT_HEIGHT = 3;
    
     private static final int TIMER_DELAY = 0;
-    private static final int TIMER_PERIOD = 10;
+    private static final int TIMER_PERIOD = 1;
     public static final Color backgroundColor = new Color(128, 128, 128);
     int incrColor =0;
     public Color[] mArrayColor = {Color.BLUE,Color.CYAN,Color.GRAY,Color.GREEN,Color.LIGHT_GRAY,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.WHITE,Color.YELLOW};
@@ -53,16 +53,16 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
      * Démarrage du panel
      */
     public void launch() {
-        mEnv = CEnvironement.getInstance();
-
-        mEnv.init(0, 0, getWidth(), getHeight(),NOURRITURE_COUNT);
-        mEnv.addObserver(this);
+        
         
         mTimer = new Timer();
         mTask = new TimerTask()
         {
         	@Override
-        	public void run() {mEnv.update();}
+        	public void run() {
+        		mEnv = CEnvironement.getEnvironement();
+        		repaint();
+        	}
         };
         mTimer.scheduleAtFixedRate(mTask, TIMER_DELAY, TIMER_PERIOD);		
     }

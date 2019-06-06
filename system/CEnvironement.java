@@ -49,6 +49,13 @@ public class CEnvironement extends Observable implements Serializable {
     	sInstance = new CEnvironement(env);
     }
     
+    public static CEnvironement getEnvironement() {
+    	if(sInstance == null) {
+			return null;
+		}
+		return sInstance;
+  	}
+    
     
         
     /**
