@@ -58,7 +58,7 @@ class ServerThread implements Runnable {
 		try {
 			
 			while(true) {
-				//m_CServer2.mEnv.update();
+				CServer.mEnv.update();
 				outputTram.writeObject(m_CServer2.mEnv);
 				outputTram.flush();
 				outputTram.reset();
@@ -98,6 +98,7 @@ class ServerThread implements Runnable {
 		System.out.println("Sending messages to the ServerSocket");
 		objectOutputStream.writeObject(object);
 		objectOutputStream.flush();
+		objectOutputStream.reset();
 		System.out.println("Closing socket and terminating program.");
 	}
 	/**

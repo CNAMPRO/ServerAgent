@@ -77,6 +77,7 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
     public void paintComponent(Graphics pG) {
         super.paintComponent(pG);
         if(mEnv != null) {
+        	System.out.println("peinture");
         	for(CBase b : mEnv.mBaseList)
             {
             	b.afficherBase(pG);
@@ -120,6 +121,7 @@ public class CMainPanel extends JPanel implements Observer, MouseListener {
 	{
 		mEnv.mNourritureList.add(new CNourriture(e.getX(), e.getY(), Color.BLACK, 20));
 	}
+	
     public void leftClickAction(MouseEvent e)
     { 
     	if(incrColor > 10)

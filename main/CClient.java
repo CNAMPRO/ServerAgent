@@ -24,7 +24,7 @@ public class CClient {
 	private CMainPanel panel;
 
 	private static final int TIMER_DELAY = 0;
-	private static final int TIMER_PERIOD = 10;
+	private static final int TIMER_PERIOD = 1;
 	private Timer mTimer;
 	private TimerTask mTask;
 

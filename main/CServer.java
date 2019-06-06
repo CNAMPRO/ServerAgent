@@ -56,7 +56,6 @@ public class CServer
 			
 			while(true)
 			{
-				mEnv.update();
 				new ServerThread(ss.accept(),server);
 			}
 		}
