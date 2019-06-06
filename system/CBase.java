@@ -69,14 +69,16 @@ public class CBase extends CObject implements Serializable, ISendable{
 		
 		for(int cpt = 0; cpt < this.nbAgents; cpt++)
 		{
-			if(this.fourmiz.get(cpt).Energizer <= 0) {
+			if(this.fourmiz.get(cpt).Energizer <= 0) 
+			{
 				pG.setColor(Color.BLACK);
-				this.fourmiz.get(cpt).backToHome();			}
-			else {
+				this.fourmiz.get(cpt).backToHome();			
+			}
+			else 
+			{
 				pG.setColor(color);
 			}
-			this.fourmiz.get(cpt);
-			this.fourmiz.get(cpt);
+			
 			pG.fillOval((int)this.fourmiz.get(cpt).posX,
 					(int)this.fourmiz.get(cpt).posY,
 					(int)CAgent.SIZE,
