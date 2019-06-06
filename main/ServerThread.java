@@ -8,7 +8,7 @@ import java.io.*;
 
 class ServerThread implements Runnable {
 	private Thread m_t;
-	private Socket m_s;
+	private Socket mSocket;
 	private PrintWriter m_out; // flux de sortie
 	private BufferedReader m_in; // flux d'entree
 	private CServer m_CServer2; // classe principale
@@ -23,17 +23,17 @@ class ServerThread implements Runnable {
 
 	ServerThread(Socket s, CServer blablaServ) throws IOException, ClassNotFoundException {
 		m_CServer2 = blablaServ;
-		m_s = s;
-		System.out.println(s);
-		output = m_s.getOutputStream();
-		input = m_s.getInputStream();
+		mSocket = s;
+		output = mSocket.getOutputStream();
+		input = mSocket.getInputStream();
 		outputTram = new ObjectOutputStream(output);
 		inputTram = new ObjectInputStream(input);
 		
 		try {
-			m_out = new PrintWriter(m_s.getOutputStream());
-			m_in = new BufferedReader(new InputStreamReader(m_s.getInputStream()));
+			m_out = new PrintWriter(mSocket.getOutputStream());
+			m_in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
 			m_numClient = blablaServ.addClient(m_out);
+			System.out.println(m_out);
 		} catch (IOException e) {
 		}
 		System.out.println("aie");
@@ -42,11 +42,8 @@ class ServerThread implements Runnable {
 		
 		CBase base = (CBase) inputTram.readObject();
 		System.out.println(base);
-		if(base != null) {
-			System.out.println("ajout base");
-			m_CServer2.mEnv.mBaseList.add(base);
-			System.out.println(m_CServer2.mEnv.mBaseList.size());
-		}
+		if(base != null) 
+			CServer.mEnv.mBaseList.add(base);
 		
 		m_t = new Thread(this);
 		m_t.start();
