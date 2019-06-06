@@ -71,13 +71,7 @@ public class CAgent extends CObject implements Serializable{
 			mSpeedY = CEnvironement.getInstance().mRandomGen.nextDouble() - 0.5;
 		}
 		if (mBusy) {
-			CPheromone unePheromone = pheromones.get(saveIndexPhero);
-			double distanceCarre = DistanceCarre(unePheromone);
-			double distance = Math.sqrt(distanceCarre);
-			double diffX = (unePheromone.getPosX() - posX) / distance;
-			double diffY = (unePheromone.getPosY() - posY) / distance;
-			mSpeedX = diffX / 2;
-			mSpeedY = diffY / 2;
+			calculDistancePheromone();
 			normalize();
 			saveIndexPhero = (saveIndexPhero - 1 >= 0) ? saveIndexPhero - 1 : 0;
 		}
@@ -97,6 +91,12 @@ public class CAgent extends CObject implements Serializable{
 	}
 	
 	public void backToHome() {
+		calculDistancePheromone();
+		saveIndexPhero = (saveIndexPhero - 1 >= 0) ? saveIndexPhero - 1 : 0;
+	}
+	
+	public void calculDistancePheromone()
+	{
 		CPheromone unePheromone = pheromones.get(saveIndexPhero);
 		double distanceCarre = DistanceCarre(unePheromone);
 		double distance = Math.sqrt(distanceCarre);
@@ -105,7 +105,6 @@ public class CAgent extends CObject implements Serializable{
 		mSpeedX = diffX / 2;
 		mSpeedY = diffY / 2;
 		normalize();
-		saveIndexPhero = (saveIndexPhero - 1 >= 0) ? saveIndexPhero - 1 : 0;
 	}
 
 	int index = 0;
